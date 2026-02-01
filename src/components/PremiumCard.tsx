@@ -108,39 +108,7 @@ const PremiumCard: React.FC<PremiumCardProps> = ({
 
         {/* Content */}
         <div className="relative z-10 p-6">
-          {/* Header with badge */}
-          <div className="flex items-start justify-between mb-4">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <Badge 
-                variant="secondary" 
-                className="bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 text-white border-0 backdrop-blur-md px-3 py-1"
-              >
-                <Sparkles className="w-3 h-3 mr-1" />
-                {badge}
-              </Badge>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring' }}
-              className="flex items-center gap-1"
-            >
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.05 }}
-                >
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+ 
 
           {/* Image container */}
           <motion.div

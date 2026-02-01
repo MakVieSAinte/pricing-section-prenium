@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { Sparkles, ArrowUpRight, Star, Zap, Shield, Crown } from 'lucide-react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { Sparkles, ArrowUpRight, Zap, Shield, Crown } from 'lucide-react'
+import FloatingParticles from './particles'
 
 export interface PremiumCardV2Props {
   title?: string
@@ -8,7 +9,6 @@ export interface PremiumCardV2Props {
   description?: string
   price?: string
   imageUrl?: string
-  badge?: string
   features?: string[]
   onAction?: () => void
   actionLabel?: string
@@ -20,7 +20,6 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
   description = "Découvrez l'excellence avec notre offre exclusive. Un design unique allié à des performances exceptionnelles.",
   price = '299€',
   imageUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
-  badge = 'Premium',
   features = ['Design exclusif', 'Support prioritaire', 'Mises à jour gratuites'],
   onAction,
   actionLabel = 'Découvrir',
@@ -29,7 +28,7 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
   const [isHovered, setIsHovered] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
-  // Motion values for 3D tilt effect
+  // Motion values for 3D tilt effec
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -67,7 +66,7 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
         transition={{ duration: 0.1 }}
       >
-        {/* Animated gradient background */}
+        {/* mon animated gradient */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute -inset-[100%] opacity-30"
@@ -80,7 +79,7 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
           />
         </div>
 
-        {/* Spotlight effect */}
+        {/* mon Spotlight effect */}
         <motion.div
           className="absolute inset-0 opacity-0 pointer-events-none"
           animate={{ opacity: isHovered ? 1 : 0 }}
@@ -96,34 +95,12 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
           />
         </motion.div>
 
-        {/* Glass overlay */}
+        {/* mon Glass overlay */}
         <div className="absolute inset-0 bg-white/5 backdrop-blur-sm" />
 
         {/* Content */}
         <div className="relative z-10 p-6">
-          {/* Header with badge */}
-          <div className="flex items-start justify-between mb-4">
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
-              <span
-                className="inline-flex items-center rounded-md bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 text-white border-0 backdrop-blur-md px-3 py-1 text-xs font-medium"
-              >
-                <Sparkles className="w-3 h-3 mr-1" />
-                {badge}
-              </span>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring' }}
-              className="flex items-center gap-1"
-            >
-              {[...Array(5)].map((_, i) => (
-                <motion.div key={i} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 + i * 0.05 }}>
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          
 
           {/* Image container */}
           <motion.div className="relative h-48 mb-6 rounded-2xl overflow-hidden group" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
@@ -178,7 +155,7 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
             <button
               onClick={onAction}
-              className="w-full group relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white font-semibold py-6 rounded-xl transition-all duration-300"
+              className="w-full group relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-500 hover:via-pink-500 hover:to-blue-500 text-white font-semibold py-4 rounded-xl transition-all duration-300"
             >
               <motion.span className="absolute inset-0 bg-white/20" initial={{ x: '-100%' }} whileHover={{ x: '100%' }} transition={{ duration: 0.5 }} />
               <span className="relative flex items-center justify-center gap-2">
@@ -193,33 +170,8 @@ const PremiumCardV2: React.FC<PremiumCardV2Props> = ({
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
       </motion.div>
 
-      {/* Floating particles */}
-      <AnimatePresence>
-        {isHovered && (
-          <>
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 rounded-full"
-                style={{
-                  background: i % 2 === 0 ? 'rgba(168, 85, 247, 0.6)' : 'rgba(59, 130, 246, 0.6)',
-                  left: `${20 + i * 15}%`,
-                  top: '50%',
-                }}
-                initial={{ opacity: 0, y: 0, scale: 0 }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  y: -100 - Math.random() * 50,
-                  x: (Math.random() - 0.5) * 60,
-                  scale: [0, 1, 0],
-                }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.5, delay: i * 0.1, repeat: Infinity }}
-              />
-            ))}
-          </>
-        )}
-      </AnimatePresence>
+      {/* Floating particules */}
+      <FloatingParticles isHovered={isHovered} />
     </motion.div>
   )
 }

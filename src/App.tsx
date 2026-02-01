@@ -5,11 +5,13 @@ import { Code, Copy, Check, Sparkles, Layers, Palette } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Demo from '../source/démos/default'
 
 // Background animated component
 const AnimatedBackground = () => {
   return (
     <>
+    <Demo />
     <div className="fixed inset-0 overflow-hidden -z-10">
       {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
@@ -209,7 +211,7 @@ function App() {
 
             <TabsContent value="preview" className="mt-0">
               {/* Cards Grid */}
-              <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="grid md:grid-cols-3 gap-8 mb-16 mt-32">
                 {cardVariants.map((variant, index) => (
                   <motion.div
                     key={index}
