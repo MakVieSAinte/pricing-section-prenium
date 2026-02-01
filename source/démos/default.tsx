@@ -4,6 +4,7 @@ import PremiumCardV2 from '../composants/premium-card-v2/composant'
 export default function Demo() {
   return (
     <div className="min-h-screen w-full bg-slate-950 flex items-center justify-center p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 w-full max-w-5xl mx-auto justify-center">
       <PremiumCardV2
         title="Premium Experience"
         subtitle="Édition Limitée"
@@ -39,13 +40,14 @@ export default function Demo() {
         price="Sur mesure"
         imageUrl="https://images.unsplash.com/photo-1723149478783-924c6c3f85a1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGFic3RyYWl0JTIwZG9yZXxlbnwwfHwwfHx8MA%3D%3D"
         features={[
-          'Déploiement cloud + outils avancés',
+          'Déploiement cloud',
           'Sécurité renforcée',
           'Account manager',
         ]}
         actionLabel="Nous contacter"
         onAction={() => console.log('Action v2_3')}
       />
+    </div>
     </div>
   )
 }
